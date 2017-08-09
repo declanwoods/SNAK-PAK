@@ -1,0 +1,2 @@
+snaptogrid=1,10
+autosavenet=1

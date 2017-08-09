@@ -1,0 +1,7 @@
+[Text],[Command],[Argument] ,
+Remote Desktop,mstsc,/v [net.IP],
+Task List,cmd,/k tasklist /s [net.IP],
+Open Notepad,\\[net.IP]\D$\test.txt,,
+Ping,ping,[net.Name],
+Ping 2,cmd,/k ping [net.Name],
+Ping 3,cmd,/k ping [net.IP],
