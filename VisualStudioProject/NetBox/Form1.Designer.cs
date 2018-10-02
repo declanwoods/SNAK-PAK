@@ -174,6 +174,7 @@
             this.ToolStripMenuItem1});
             this.cmnBox.Name = "cmnBox";
             this.cmnBox.Size = new System.Drawing.Size(108, 54);
+            this.cmnBox.Opening += new System.ComponentModel.CancelEventHandler(this.cmnBox_Opening);
             // 
             // EditToolStripMenuItem
             // 
@@ -291,7 +292,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Location = new System.Drawing.Point(16, 72);
             this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(59, 13);
+            this.Label2.Size = new System.Drawing.Size(58, 13);
             this.Label2.TabIndex = 0;
             this.Label2.Text = "IP Address";
             // 
@@ -338,7 +339,7 @@
             // 
             // btnLoadNet
             // 
-            this.btnLoadNet.Location = new System.Drawing.Point(363, 3);
+            this.btnLoadNet.Location = new System.Drawing.Point(284, 12);
             this.btnLoadNet.Name = "btnLoadNet";
             this.btnLoadNet.Size = new System.Drawing.Size(68, 23);
             this.btnLoadNet.TabIndex = 9;
@@ -348,7 +349,7 @@
             // 
             // btnSaveNetAs
             // 
-            this.btnSaveNetAs.Location = new System.Drawing.Point(480, 14);
+            this.btnSaveNetAs.Location = new System.Drawing.Point(432, 12);
             this.btnSaveNetAs.Name = "btnSaveNetAs";
             this.btnSaveNetAs.Size = new System.Drawing.Size(78, 23);
             this.btnSaveNetAs.TabIndex = 9;
@@ -358,7 +359,7 @@
             // 
             // btnSaveNet
             // 
-            this.btnSaveNet.Location = new System.Drawing.Point(363, 25);
+            this.btnSaveNet.Location = new System.Drawing.Point(358, 12);
             this.btnSaveNet.Name = "btnSaveNet";
             this.btnSaveNet.Size = new System.Drawing.Size(68, 23);
             this.btnSaveNet.TabIndex = 9;
@@ -369,7 +370,7 @@
             // 
             // btnAddBoxList
             // 
-            this.btnAddBoxList.Location = new System.Drawing.Point(100, 12);
+            this.btnAddBoxList.Location = new System.Drawing.Point(84, 12);
             this.btnAddBoxList.Name = "btnAddBoxList";
             this.btnAddBoxList.Size = new System.Drawing.Size(113, 23);
             this.btnAddBoxList.TabIndex = 8;
@@ -380,9 +381,9 @@
             // cmdExitApp
             // 
             this.cmdExitApp.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cmdExitApp.Location = new System.Drawing.Point(564, 0);
+            this.cmdExitApp.Location = new System.Drawing.Point(550, 0);
             this.cmdExitApp.Name = "cmdExitApp";
-            this.cmdExitApp.Size = new System.Drawing.Size(53, 51);
+            this.cmdExitApp.Size = new System.Drawing.Size(67, 51);
             this.cmdExitApp.TabIndex = 8;
             this.cmdExitApp.Text = "Exit";
             this.cmdExitApp.UseVisualStyleBackColor = true;
@@ -390,7 +391,7 @@
             // 
             // btnArrange
             // 
-            this.btnArrange.Location = new System.Drawing.Point(219, 12);
+            this.btnArrange.Location = new System.Drawing.Point(203, 12);
             this.btnArrange.Name = "btnArrange";
             this.btnArrange.Size = new System.Drawing.Size(75, 23);
             this.btnArrange.TabIndex = 8;
@@ -400,7 +401,7 @@
             // 
             // btnAddBox
             // 
-            this.btnAddBox.Location = new System.Drawing.Point(19, 12);
+            this.btnAddBox.Location = new System.Drawing.Point(3, 12);
             this.btnAddBox.Name = "btnAddBox";
             this.btnAddBox.Size = new System.Drawing.Size(75, 23);
             this.btnAddBox.TabIndex = 8;
@@ -518,7 +519,7 @@
             this.lblEditMode.AutoSize = true;
             this.lblEditMode.Location = new System.Drawing.Point(68, 376);
             this.lblEditMode.Name = "lblEditMode";
-            this.lblEditMode.Size = new System.Drawing.Size(11, 13);
+            this.lblEditMode.Size = new System.Drawing.Size(10, 13);
             this.lblEditMode.TabIndex = 5;
             this.lblEditMode.Text = "-";
             // 
@@ -527,7 +528,7 @@
             this.lblMnuId.AutoSize = true;
             this.lblMnuId.Location = new System.Drawing.Point(21, 270);
             this.lblMnuId.Name = "lblMnuId";
-            this.lblMnuId.Size = new System.Drawing.Size(17, 13);
+            this.lblMnuId.Size = new System.Drawing.Size(16, 13);
             this.lblMnuId.TabIndex = 5;
             this.lblMnuId.Text = "-1";
             this.lblMnuId.Visible = false;
@@ -547,7 +548,7 @@
             this.Label5.AutoSize = true;
             this.Label5.Location = new System.Drawing.Point(21, 29);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(29, 13);
+            this.Label5.Size = new System.Drawing.Size(28, 13);
             this.Label5.TabIndex = 5;
             this.Label5.Text = "Text";
             // 
@@ -574,7 +575,7 @@
             this.Label3.AutoSize = true;
             this.Label3.Location = new System.Drawing.Point(21, 172);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(61, 13);
+            this.Label3.Size = new System.Drawing.Size(58, 13);
             this.Label3.TabIndex = 5;
             this.Label3.Text = "Argument :";
             // 
@@ -664,7 +665,7 @@
             this.RadioButton1.Checked = true;
             this.RadioButton1.Location = new System.Drawing.Point(19, 64);
             this.RadioButton1.Name = "RadioButton1";
-            this.RadioButton1.Size = new System.Drawing.Size(90, 17);
+            this.RadioButton1.Size = new System.Drawing.Size(88, 17);
             this.RadioButton1.TabIndex = 1;
             this.RadioButton1.TabStop = true;
             this.RadioButton1.Text = "Process.Start";
@@ -698,7 +699,7 @@
             this.Label4.AutoSize = true;
             this.Label4.Location = new System.Drawing.Point(190, 27);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(48, 13);
+            this.Label4.Size = new System.Drawing.Size(49, 13);
             this.Label4.TabIndex = 7;
             this.Label4.Text = "Grid Size";
             // 
@@ -715,7 +716,7 @@
             this.chkAutoSaveNet.AutoSize = true;
             this.chkAutoSaveNet.Location = new System.Drawing.Point(60, 68);
             this.chkAutoSaveNet.Name = "chkAutoSaveNet";
-            this.chkAutoSaveNet.Size = new System.Drawing.Size(141, 17);
+            this.chkAutoSaveNet.Size = new System.Drawing.Size(140, 17);
             this.chkAutoSaveNet.TabIndex = 5;
             this.chkAutoSaveNet.Text = "Auto-Save Net on Close";
             this.chkAutoSaveNet.UseVisualStyleBackColor = true;

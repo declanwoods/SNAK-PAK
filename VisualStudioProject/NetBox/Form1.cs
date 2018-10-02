@@ -275,7 +275,7 @@ namespace NetBox
                 if (chkSnapToGrid.Checked == true)
                 {
                     Control sCtrl = (Control)sender;
-                    if (sCtrl.Tag != "Selected")
+                    if ((String)sCtrl.Tag != "Selected")
                     {
                         int iX = (sCtrl.Left + e.X) - _myX;
                         int iY = (sCtrl.Top + e.Y) - _myY;
@@ -625,94 +625,195 @@ namespace NetBox
         {
             try
             {
-                string sName = cmnBox.SourceControl.Text;
-                int iB = _myNet_Name.IndexOf(sName);
-                string mnuText = null;
-                mnuText = ((ToolStripMenuItem)sender).Text;
-                int i;
-                for (i = 0; i <= _mnuText.Count - 1; i++)
+                bool done = false;
+                for (int x = 0; x < PanelNet.Controls.Count; x++)
                 {
-                    if (Strings.Trim(mnuText) == Strings.Trim(_mnuText[i]))
+                    if ((string)PanelNet.Controls[x].Tag == "Selected")
                     {
-                        //cek variable for Command
-                        string[] aCmd = Strings.Split(_mnuCmd[i], "[");
-                        string sCmd = null;
-                        if (aCmd.Length > 0)
+                        done = true;
+                        string sName = PanelNet.Controls[x].Text;
+                        int iB = _myNet_Name.IndexOf(sName);
+                        string mnuText = null;
+                        mnuText = ((ToolStripMenuItem)sender).Text;
+                        for (int i = 0; i <= _mnuText.Count - 1; i++)
                         {
-                            sCmd = aCmd[0];
-                            int j;
-                            for (j = 1; j <= aCmd.Length - 1; j++)
+                            if (Strings.Trim(mnuText) == Strings.Trim(_mnuText[i]))
                             {
-                                string[] aVar = Strings.Split(aCmd[j], "]");
-                                int k;
-                                for (k = 0; k <= aVar.Length - 1; k++)
+                                //cek variable for Command
+                                string[] aCmd = Strings.Split(_mnuCmd[i], "[");
+                                string sCmd = null;
+                                if (aCmd.Length > 0)
                                 {
-                                    if (k == 0)
+                                    sCmd = aCmd[0];
+                                    int j;
+                                    for (j = 1; j <= aCmd.Length - 1; j++)
                                     {
-                                        string sVar = aVar[0];
-                                        switch (sVar)
+                                        string[] aVar = Strings.Split(aCmd[j], "]");
+                                        int k;
+                                        for (k = 0; k <= aVar.Length - 1; k++)
                                         {
-                                            case "net.Name":
-                                                sCmd = sCmd + _myNet_Name[iB];
-                                                break;
-                                            case "net.IP":
-                                                sCmd = sCmd + _myNet_IP[iB];
-                                                break;
+                                            if (k == 0)
+                                            {
+                                                string sVar = aVar[0];
+                                                switch (sVar)
+                                                {
+                                                    case "net.Name":
+                                                        sCmd = sCmd + _myNet_Name[iB];
+                                                        break;
+                                                    case "net.IP":
+                                                        sCmd = sCmd + _myNet_IP[iB];
+                                                        break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                sCmd = sCmd + aVar[k];
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
-                                        sCmd = sCmd + aVar[k];
+
                                     }
                                 }
-
-                            }
-                        }
-                        else
-                        {
-                            sCmd = _mnuCmd[i];
-                        }
-
-                        //cek variable for Argument
-                        string[] aArg = Strings.Split(_mnuArg[i], "[");
-                        string sArg = null;
-                        if (aArg.Length > 0)
-                        {
-                            sArg = aArg[0];
-                            int j;
-                            for (j = 1; j <= aArg.Length - 1; j++)
-                            {
-                                string[] aVar = Strings.Split(aArg[j], "]");
-                                int k;
-                                for (k = 0; k <= aVar.Length - 1; k++)
+                                else
                                 {
-                                    if (k == 0)
-                                    {
-                                        string sVar = aVar[0];
-                                        switch (sVar)
-                                        {
-                                            case "net.Name":
-                                                sArg = sArg + _myNet_Name[iB];
-                                                break;
-                                            case "net.IP":
-                                                sArg = sArg + _myNet_IP[iB];
-                                                break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        sArg = sArg + aVar[k];
-                                    }
+                                    sCmd = _mnuCmd[i];
                                 }
 
+                                //cek variable for Argument
+                                string[] aArg = Strings.Split(_mnuArg[i], "[");
+                                string sArg = null;
+                                if (aArg.Length > 0)
+                                {
+                                    sArg = aArg[0];
+                                    int j;
+                                    for (j = 1; j <= aArg.Length - 1; j++)
+                                    {
+                                        string[] aVar = Strings.Split(aArg[j], "]");
+                                        int k;
+                                        for (k = 0; k <= aVar.Length - 1; k++)
+                                        {
+                                            if (k == 0)
+                                            {
+                                                string sVar = aVar[0];
+                                                switch (sVar)
+                                                {
+                                                    case "net.Name":
+                                                        sArg = sArg + _myNet_Name[iB];
+                                                        break;
+                                                    case "net.IP":
+                                                        sArg = sArg + _myNet_IP[iB];
+                                                        break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                sArg = sArg + aVar[k];
+                                            }
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    sArg = _mnuArg[i];
+                                }
+
+                                Process.Start(sCmd, sArg);
                             }
                         }
-                        else
-                        {
-                            sArg = _mnuArg[i];
-                        }
+                    }
+                }
 
-                        Process.Start(sCmd, sArg);
+                if (!done)
+                {
+                    string sName = cmnBox.SourceControl.Text;
+                    int iB = _myNet_Name.IndexOf(sName);
+                    string mnuText = null;
+                    mnuText = ((ToolStripMenuItem)sender).Text;
+                    int i;
+                    for (i = 0; i <= _mnuText.Count - 1; i++)
+                    {
+                        if (Strings.Trim(mnuText) == Strings.Trim(_mnuText[i]))
+                        {
+                            //cek variable for Command
+                            string[] aCmd = Strings.Split(_mnuCmd[i], "[");
+                            string sCmd = null;
+                            if (aCmd.Length > 0)
+                            {
+                                sCmd = aCmd[0];
+                                int j;
+                                for (j = 1; j <= aCmd.Length - 1; j++)
+                                {
+                                    string[] aVar = Strings.Split(aCmd[j], "]");
+                                    int k;
+                                    for (k = 0; k <= aVar.Length - 1; k++)
+                                    {
+                                        if (k == 0)
+                                        {
+                                            string sVar = aVar[0];
+                                            switch (sVar)
+                                            {
+                                                case "net.Name":
+                                                    sCmd = sCmd + _myNet_Name[iB];
+                                                    break;
+                                                case "net.IP":
+                                                    sCmd = sCmd + _myNet_IP[iB];
+                                                    break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sCmd = sCmd + aVar[k];
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                sCmd = _mnuCmd[i];
+                            }
+
+                            //cek variable for Argument
+                            string[] aArg = Strings.Split(_mnuArg[i], "[");
+                            string sArg = null;
+                            if (aArg.Length > 0)
+                            {
+                                sArg = aArg[0];
+                                int j;
+                                for (j = 1; j <= aArg.Length - 1; j++)
+                                {
+                                    string[] aVar = Strings.Split(aArg[j], "]");
+                                    int k;
+                                    for (k = 0; k <= aVar.Length - 1; k++)
+                                    {
+                                        if (k == 0)
+                                        {
+                                            string sVar = aVar[0];
+                                            switch (sVar)
+                                            {
+                                                case "net.Name":
+                                                    sArg = sArg + _myNet_Name[iB];
+                                                    break;
+                                                case "net.IP":
+                                                    sArg = sArg + _myNet_IP[iB];
+                                                    break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sArg = sArg + aVar[k];
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                sArg = _mnuArg[i];
+                            }
+
+                            Process.Start(sCmd, sArg);
+                        }
                     }
                 }
             }
@@ -1381,6 +1482,11 @@ namespace NetBox
             }
             catch (Exception)
             { }
+        }
+
+        private void cmnBox_Opening(object sender, CancelEventArgs e)
+        {
+
         }
 
         private void TimerStart_Tick(System.Object sender, System.EventArgs e)
