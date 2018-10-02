@@ -1489,6 +1489,11 @@ namespace NetBox
 
         }
 
+        private void TabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void TimerStart_Tick(System.Object sender, System.EventArgs e)
         {
             TimerStart.Stop();
